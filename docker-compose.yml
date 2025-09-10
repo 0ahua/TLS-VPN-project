@@ -1,0 +1,46 @@
+# version: '3.8'
+
+services:
+  vpnserver:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    container_name: vpn-server
+    privileged: true # 给予容器完全特权
+    cap_add:
+      - NET_ADMIN  # 允许网络管理操作
+      - SYS_MODULE # 允许加载内核模块
+    devices:
+      - /dev/net/tun:/dev/net/tun # 显式映射TUN设备
+    volumes:
+      - ./certs:/app/certs  # :ro  挂载证书目录（只读）
+    ports:
+      - "443:443"  # 暴露TLS端口
+    networks:
+      - vpn-network
+    command: ["/app/server", "--pqc"]
+    restart: unless-stopped
+
+  vpnclient:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    container_name: vpn-client
+    privileged: true  # 给予容器完全特权
+    cap_add:
+      - NET_ADMIN  # 允许网络管理操作
+      - SYS_MODULE # 允许加载内核模块
+    devices:
+      - /dev/net/tun:/dev/net/tun # 显式映射TUN设备
+    volumes:
+      - ./certs:/app/certs # :ro  # 挂载证书目录（只读）
+    depends_on:
+      - vpnserver
+    networks:
+      - vpn-network
+    command: ["/app/client", "--pqc"]
+    restart: unless-stopped
+
+networks:
+  vpn-network:
+    driver: bridge
