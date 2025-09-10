@@ -87,15 +87,20 @@ TLS-VPN-project/
 
 项目提供了一系列脚本用于测试VPN性能和功能：
 
-### 1. TLS握手测试# 测试握手耗时（默认5次，可通过参数指定次数）
+1. **TLS握手测试**
+测试握手耗时（默认5次，可通过参数指定次数）
 sh/sh/test_handshake.sh [次数]
-### 2. 吞吐量测试# 需先安装iperf3
+2. **吞吐量测试**
+需先安装iperf3
 sh/sh/test_throughput.sh
-### 3. 资源占用测试# 监控CPU和内存使用情况
+3. **资源占用测试**
+监控CPU和内存使用情况
 sh/sh/test_resource.sh
-### 4. 数据包捕获# 捕获TLS握手数据包（保存为tls_handshake.pcap）
+4. **数据包捕获**
+捕获TLS握手数据包（保存为tls_handshake.pcap）
 sh/sh/tls_capture.sh
-### 5. 捕获TUN隧道数据包（保存为tun0_traffic.pcap）
+5. **捕获TUN隧道数据包**
+（保存为tun0_traffic.pcap）
 sh/sh/tun0_capture.sh
 
 ## 六、配置说明
