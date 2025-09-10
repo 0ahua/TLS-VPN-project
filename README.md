@@ -11,6 +11,7 @@
 项目采用Go语言开发，通过Docker容器化部署，简化了环境配置和跨平台使用流程。
 
 ## 项目结构
+'''
 TLS-VPN-project/
 ├── server/           # 服务器端代码
 ├── client/           # 客户端代码
@@ -22,6 +23,7 @@ TLS-VPN-project/
 │   └── ...
 ├── docker-compose.yml       # 容器部署配置
 └── README.md                # 项目说明
+'''
 
 ## 核心功能
 
